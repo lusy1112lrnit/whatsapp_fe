@@ -12,6 +12,8 @@ const socket = io(process.env.REACT_APP_API_ENDPOINT.split("/api/v1")[0]);
 
 function App() {
   const {user} = useSelector((state) => state.user);
+  const {files} = useSelector((state) => state.chat);
+  console.log("files", files);
   const {token} = user;
   return (
     <div className="dark">

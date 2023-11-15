@@ -13,6 +13,9 @@
     .btn {
         @apply w-[40px] h-[40px] rounded-full flex items-center justify-center active:bg-dark_hover_1;
     }
+    .btn_secondary {
+        @apply w-[45px] h-[45px] rounded-full flex items-center justify-center bg-dark_bg_2;
+    }
     .p16{
         @apply px-[16px];
     }
@@ -41,6 +44,37 @@
     }
     .online{
         border: 2px solid #00a884;
+    }
+    .hview{
+        height: calc(100vh - 290px);
+        padding: 25px 0;
+    }
+    .imgicon{
+        width: 85px;
+        height: 85px;
+        object-fit: cover;
+    }
+    .fileThumbnail:hover .removeFileIcon {
+        display:  block;
+    }
+    .callbg {
+        background-image: linear-gradient(blue, black),
+            url(http://res.cloudinary.com/dvcotxpyr/raw/upload/v1699272957/kchgth25lpqxyl5unnrs.jpg);
+        background-position: center;
+        background-size: cover;
+        background-blend-mode: overlay;
+    }
+    .largeVideoCall {
+        @apply absolute top-0 bottom-0 left-0 right-0 z-20 object-cover h-full bg-red-400 cursor-pointer;
+    }
+    .smallVideoCall {
+        @apply w-28 h-32 object-cover absolute bottom-4 right-2 z-30 bg-blue-500 cursor-pointer;
+    }
+    .moveVideoCall {
+        @apply bottom-32 transition-all duration-100;
+    }
+    .moveActionsComp {
+        @apply block;
     }
 }
 
@@ -135,5 +169,80 @@
     @keyframes openTools {
         0% {
         transform: translateY(100%);
+        }
+    }
+
+    /* React select */
+    .css-obio5r-control:hover {
+        border-color: transparent !important;
+    }
+    .css-obio5r-control {
+        box-shadow: none !important;
+    }
+    
+    .css-1hb7zxy-IndicatorsContainer {
+        display: none !important;
+    }
+    .css-1p3m7a8-multiValue {
+        background: transparent !important;
+        color: #fff !important;
+        border: 1px solid #025144;
+        border-radius: 5px !important;
+    }
+    .css-1p3m7a8-multiValue span {
+        color: #fff !important;
+    }
+    .css-1p3m7a8-multiValue span:hover {
+        background: transparent !important;
+    }
+    .css-tj5bde-Svg {
+        background: red;
+        border-radius: 50%;
+    }
+    .css-12a83d4-MultiValueRemove:hover {
+        background: transparent !important;
+    }
+    .css-12a83d4-MultiValueRemove:hover svg {
+        fill: #fff !important;
+    }
+    .css-qbdosj-Input input {
+        color: #fff !important;
+    }
+    .css-1nmdiq5-menu {
+        background: transparent !important;
+        color: #fff !important;
+        border: 1px solid #025144;
+        border-radius: 5px !important;
+    }
+    .css-1n6sfyn-MenuList {
+        background: transparent !important;
+    }
+    
+    /*--- MenuList Scroollbar
+        /* width */
+    .css-1n6sfyn-MenuList::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    /* Track */
+    .css-1n6sfyn-MenuList::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+    /* Handle */
+    .css-1n6sfyn-MenuList::-webkit-scrollbar-thumb {
+        background: #444e54 !important;
+    }
+    .css-10wo9uf-option span {
+        color: #fff !important;
+    }
+    
+    .createGroupAnimation {
+        animation: cga 0.5s;
+    }
+    @keyframes cga {
+        0% {
+        width: 0;
+        }
+        100% {
+        width: 100%;
         }
     }

@@ -12,6 +12,7 @@ function Conversation({ convo, socket, online, typing }) {
     const {token} = user;
     const values = {
         receiver_id: getConversationId(user, convo.users),
+        isGroup: convo.isGroup ? convo._id : false,
         token,
     };
     const openConversation = async() =>{
@@ -20,7 +21,7 @@ function Conversation({ convo, socket, online, typing }) {
     };
   return (
     <li 
-        onClick={()=>openConversation()}
+        onClick={() => openConversation()}
         className={`list-none h-[72px] w-full dark:bg-dark_bg_1 hover:${
             convo._id !== activeConversation._id ? "dark:bg-dark_bg_2" : ""
         } cursor-pointer dark:text-dark_text_1 px-[10px] ${
@@ -33,7 +34,10 @@ function Conversation({ convo, socket, online, typing }) {
                 {/**Conversation user picture */}
                 <div className={`relative min-w-[50px] max-w-[50px] h-[50px] rounded-full overflow-hidden ${online ? "online" : " "}`}>
                     <img 
-                        src={getConversationPicture(user, convo.users)} 
+                        src={ convo.isGroup 
+                            ? convo.picture 
+                            : getConversationPicture(user, convo.users)
+                        } 
                         atl="picture" 
                         className="w-full h-full object-cover" 
                     />
@@ -42,7 +46,9 @@ function Conversation({ convo, socket, online, typing }) {
                 <div className="w-full flex flex-col">
                     {/**Conversation name */}
                     <h1 className="font-bold flex items-center gap-x-2">
-                        {capitalize(getConversationName(user,convo.users))}
+                        {convo.isGroup 
+                        ? convo.name 
+                        : capitalize(getConversationName(user,convo.users))}
                     </h1>
                     {/**Conversation message */}
                     <div>

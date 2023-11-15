@@ -12,4 +12,4 @@ export const checkOnlineStatus=(onlineUsers, user, users) => {
   let convoId = getConversationId(user, users);
   let check = onlineUsers.find((u) => u.userId === convoId);
   return check ? true : false;
-}
+};

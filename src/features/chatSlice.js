@@ -12,6 +12,7 @@ const initialState = {
     activeConversation: {},
     messages: [],
     notifications: [],
+    files: [],
 };
 
 
@@ -96,6 +97,26 @@ export const getConversationMessages = createAsyncThunk(
       }
     }
   );
+  export const createGroupConversation = createAsyncThunk(
+    "conervsation/create_group",
+    async (values, { rejectWithValue }) => {
+      const { name, users, token } = values;
+      try {
+        const { data } = await axios.post(
+          `${CONVERSATION_ENDPOINT}/group`,
+          { name, users },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return data;
+      } catch (error) {
+        return rejectWithValue(error.response.data.error.message);
+      }
+    }
+  );
   export const chatSlice = createSlice({
     name: "chat",
     initialState,
@@ -119,6 +140,18 @@ export const getConversationMessages = createAsyncThunk(
         );
         newConvos.unshift(conversation);
         state.conversations = newConvos;
+      },
+      addFiles: (state, action) => {
+        state.files = [...state.files, action.payload];
+      },
+      clearFiles: (state, action) => {
+        state.files = [];
+      },
+      reomveFileFromFiles: (state, action) => {
+        let index = action.payload;
+        let files = [...state.files];
+        let fileToRemove = [files[index]];
+        state.files = files.filter((file) => !fileToRemove.includes(file));
       },
     },
     extraReducers(builder) {
@@ -179,6 +212,6 @@ export const getConversationMessages = createAsyncThunk(
     },
   });
 
-export const {setActiveConversation, updateMessagesAndConversations} = chatSlice.actions;
+export const {setActiveConversation, updateMessagesAndConversations, addFiles, clearFiles, reomveFileFromFiles,} = chatSlice.actions;
 
 export default chatSlice.reducer; 
